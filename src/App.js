@@ -1,23 +1,20 @@
 import logo from './logo.svg';
 import './App.css';
+import React, { useState } from 'react'
+import AddGameForm from './AddGameForm'
+import GameGrid from './GameGrid'
 
 function App() {
+  const [games, setGames] = useState([]);
+
+  const addGame = game => {
+    setGames([...games, game]);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <AddGameForm onAddGame={addGame} />
+      <GameGrid games={games} onAddGame={addGame} />
     </div>
   );
 }
