@@ -1,0 +1,24 @@
+.board-game-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.game-thumbnail {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 46%;
+  margin: 1% 0.5% 1% 1%;
+  height: 200px;
+  background-color: #f7f7f7;
+  border: 1px solid red;
+  border-radius: 10px;
+}
+
+.game-thumbnail p {
+  margin-top: 10px;
+  text-align: center;
+}

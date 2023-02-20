@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import GameModal from './GameModal'
 
+import './styles/GameGrid.css'
+
 function GameGrid({ games }) {
   const [selectedGame, setSelectedGame] = useState(null);
 
