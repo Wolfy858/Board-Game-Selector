@@ -27,7 +27,9 @@ function GameGrid({ games }) {
         </div>
       ))}
       {selectedGame && (
-        <GameModal game={selectedGame} onClose={handleCloseModal} />
+        <div className="modal-wrapper">
+          <GameModal game={selectedGame} onClose={handleCloseModal} />
+        </div>
       )}
     </div>
   );
