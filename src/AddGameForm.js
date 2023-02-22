@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
+import database  from './Firebase';
+
 import './styles/AddGameForm.css';
 
 function AddGameForm({ onAddGame }) {
+  const gamesRef = database.ref('games');
+
   const [game, setGame] = useState({
     title: '',
     description: '',
@@ -18,7 +22,8 @@ function AddGameForm({ onAddGame }) {
 
   const handleSubmit = event => {
     event.preventDefault();
-    onAddGame(game);
+    //gamesRef.push(game); // add game to Firebase
+    onAddGame(game); // update local state
     setGame({
       title: '',
       description: '',
