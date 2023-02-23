@@ -2,17 +2,19 @@ import './App.css';
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import database from './Firebase';
+import { ref, set, onValue, push } from 'firebase/database'
 import AddGameForm from './AddGameForm';
 import GameGrid from './GameGrid';
 import NavHeader from './NavHeader';
 
 function App() {
   const [games, setGames] = useState([]);
-  const gamesRef = database.ref('games');
+  const gamesRef = ref(database, '/games');
 
   useEffect(() => {
-    gamesRef.on('value', (snapshot) => {
+    onValue(gamesRef, (snapshot) => {
       const gamesData = snapshot.val();
+
       const gamesArray = Object.entries(gamesData || {}).map(([key, value]) => ({
         id: key,
         ...value
@@ -26,7 +28,8 @@ function App() {
   // };
 
   const addGame = game => {
-    gamesRef.push(game)
+    const newGameRef = push(gamesRef);
+    set(newGameRef, game);
   }
 
   return (

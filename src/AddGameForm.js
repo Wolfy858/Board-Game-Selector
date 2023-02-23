@@ -4,7 +4,6 @@ import database  from './Firebase';
 import './styles/AddGameForm.css';
 
 function AddGameForm({ onAddGame }) {
-  const gamesRef = database.ref('games');
 
   const [game, setGame] = useState({
     title: '',
