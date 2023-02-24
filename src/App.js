@@ -23,10 +23,6 @@ function App() {
     });
   }, []);
 
-  // const addGame = game => {
-  //   setGames([...games, game]);
-  // };
-
   const addGame = game => {
     const newGameRef = push(gamesRef);
     set(newGameRef, game);
