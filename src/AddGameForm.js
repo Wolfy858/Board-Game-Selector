@@ -6,10 +6,11 @@ import './styles/AddGameForm.css';
 
 const AddGameForm = ({ onAddGame }) => {
   const [game, setGame] = useState({
-    title: '',
-    description: '',
-    players: '',
-    playTime: ''
+    // title: '',
+    // description: '',
+    // players: '',
+    // playTime: '',
+    // thumbnail: ''
   });
   const [searchResults, setSearchResults] = useState([]);
 
@@ -27,6 +28,7 @@ const AddGameForm = ({ onAddGame }) => {
       description: gameXmlDoc.getElementsByTagName("description")[0].textContent,
       players: gameXmlDoc.getElementsByTagName("minplayers")[0].getAttribute("value"),
       playTime: gameXmlDoc.getElementsByTagName("playingtime")[0].getAttribute("value"),
+      thumbnail: gameXmlDoc.getElementsByTagName("image")[0].textContent
     };
     setGame(gameData);
     setSearchResults([]);
@@ -38,13 +40,13 @@ const AddGameForm = ({ onAddGame }) => {
 
   const handleSubmit = event => {
     event.preventDefault();
-    //gamesRef.push(game); // add game to Firebase
     onAddGame(game); // update local state
     setGame({
       title: '',
       description: '',
       players: '',
-      playTime: ''
+      playTime: '',
+      thumbnail: ''
     });
   };
   return (

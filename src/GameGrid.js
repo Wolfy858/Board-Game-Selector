@@ -20,6 +20,7 @@ function GameGrid({ games }) {
         <div
           key={game.id}
           className="game-thumbnail"
+          style={{ backgroundImage: `url("${game.thumbnail}")` }}
           onClick={() => handleSelectGame(game)}
         >
           {/* <img src={game.imageUrl} alt={game.title} /> */}

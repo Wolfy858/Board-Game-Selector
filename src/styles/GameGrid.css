@@ -13,9 +13,10 @@
   width: 46%;
   margin: 1% 0.5% 1% 1%;
   height: 200px;
-  background-color: #f7f7f7;
   border: 1px solid red;
   border-radius: 10px;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .game-thumbnail p {
