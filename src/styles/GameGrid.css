@@ -35,3 +35,27 @@
   justify-content: center;
   align-items: center;
 }
+
+.grid-menu {
+  margin-top: 1em;
+  display: block;
+  text-align: center;
+}
+
+.clear-button {
+  background-color: #ff8a69;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  font-size: 16px;
+  margin-right: 10px;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  border-radius: 15px;
+}
+
+.clear-button:hover {
+  background-color: #ff0000;
+}

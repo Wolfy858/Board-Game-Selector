@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 import './styles/NavHeader.css'
 
-function NavHeader() {
+const NavHeader = () => {
   return (
     <nav>
       <ul className="nav-header">
