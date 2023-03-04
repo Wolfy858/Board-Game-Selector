@@ -6,6 +6,7 @@ const GameSearchForm = ({ onSearch }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     onSearch(query);
+    setQuery("");
   };
 
   const handleInputChange = (e) => {
