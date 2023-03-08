@@ -8,13 +8,16 @@ const NavHeader = () => {
     <nav>
       <ul className="nav-header">
         <li>
-            <Link className="nav-button" to="/">Game Grid</Link>
+          <Link className="nav-button" to="/">Game Grid</Link>
         </li>
         <li>
-            <Link className="nav-button" to="/add-game">Add Game</Link>
+          <Link className="nav-button" to="/add-game">Add Game</Link>
         </li>
         <li>
-            <Link className="nav-button" to="/players">Players</Link>
+          <Link className="nav-button" to="/players">Players</Link>
+        </li>
+        <li>
+          <Link className="nav-button" to="/play">Play</Link>
         </li>
       </ul>
     </nav>

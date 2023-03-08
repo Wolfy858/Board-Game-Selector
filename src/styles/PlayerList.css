@@ -1,0 +1,44 @@
+h2 {
+  text-align: center;
+}
+
+ul {
+  list-style-type: none;
+  margin-block-start: 0;
+  padding-inline-start: 0;
+}
+
+.players-list-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.players-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5rem;
+}
+
+.player-card {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 2px 2px 2px #ddd;
+}
+
+.player-name {
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.player-preferences {
+  font-size: 18px;
+  margin-top: 0.5rem;
+}
+
+.player-preferences > span {
+  font-weight: bold;
+  margin-right: 0.5rem;
+}

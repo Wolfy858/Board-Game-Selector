@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import { ref, onValue } from 'firebase/database';
 import database from './Firebase';
 
+import './styles/PlayerList.css'
+
 function PlayersList() {
   const [players, setPlayers] = useState([]);
 
@@ -21,6 +23,7 @@ function PlayersList() {
             }
           });
           player.preferences = preferences;
+          player.id = playerSnapshot.key
           playerList.push(player);
           setPlayers(playerList);
         });
@@ -28,54 +31,22 @@ function PlayersList() {
     });
   }, []);
 
-  // return (
-  //   <div>
-  //     <h1>Players and their preferences:</h1>
-  //     {players.map((player) => (
-  //       <div key={player.id}>
-  //         <h2>{player.name}</h2>
-  //         <ul>
-  //           {player.preferences.map((preference) => (
-  //             <li key={preference}>{preference}</li>
-  //           ))}
-  //         </ul>
-  //       </div>
-  //     ))}
-  //   </div>
-  // );
-
   return (
-        <div>
-          <h2>Players</h2>
-          <ul>
-            {players.map((player) => (
-              <li key={player.id}>
-                {player.name} - {player.preferences.length !== 0 ? player.preferences.join(', ') : 'No game preferences'}
-              </li>
-            ))}
-          </ul>
-        </div>
-      );
+    <div className="players-list-container">
+      <h2>Players</h2>
+      <div className="players-list">
+        {players.map((player) => (
+          <div key={player.id} className="player-card">
+            <div className="player-name">{player.name}</div>
+            <div className="player-preferences">
+              <span>Wants to play:</span>
+              <div>{player.preferences.length !== 0 ? player.preferences.join(', ') : 'Any'}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 }
 
 export default PlayersList;
-// import React from 'react';
-// import { ref, onValue } from 'firebase/database';
-// import database from './Firebase';
-
-// function PlayerList() {
-//   const [players, setPlayers] = React.useState([]);
-
-//   React.useEffect(() => {
-//     const playersRef = ref(database, '/players');
-//     onValue(playersRef, (snapshot) => {
-//       const playersData = snapshot.val();
-//       const playersArray = playersData ? Object.entries(playersData).map(([key, value]) => ({ id: key, ...value })) : [];
-//       setPlayers(playersArray);
-//     });
-//   }, []);
-
-//   
-// }
-
-// export default PlayerList;
