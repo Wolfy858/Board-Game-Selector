@@ -28,21 +28,17 @@ function GameModal({ game, onClose }) {
     onClose();
   };
 
-  // const handleAddPreference = () => {
-  //   if (selectedPlayer) {
-  //     const gameRef = ref(database, `/games/${game.id}`);
-  //     const gamePlayersRef = child(gameRef, 'players');
-  //     push(gamePlayersRef, selectedPlayer);
-  //     onClose();
-  //   }
-  // };
-
   const handleAddPreference = () => {
     if (selectedPlayer) {
       const gameRef = ref(database, `/games/${game.id}`);
-      const gamePlayersRef = child(gameRef, 'players');
-      const newPlayerRef = push(gamePlayersRef, selectedPlayer);
-      setSelectedPlayer(newPlayerRef.key);
+      const gameEnjoyersRef = child(gameRef, 'enjoyers');
+      const newEnjoyerRef = push(gameEnjoyersRef, selectedPlayer);
+
+      const playerRef = ref(database, `/players/${selectedPlayer}`)
+      const playerPreferencesRef = child(playerRef, 'preferences');
+      push(playerPreferencesRef, game.id)
+
+      setSelectedPlayer(newEnjoyerRef.key);
       onClose();
     }
   };
@@ -53,7 +49,7 @@ function GameModal({ game, onClose }) {
         <h1>{game.title}</h1>
         <p>Description: {game.description}</p>
         <p>Play time (minutes): {game.playTime}</p>
-        <p>Max number of players: {game.players}</p>
+        <p>Max number of players: {game.playerCount}</p>
         <select value={selectedPlayer} onChange={(e) => setSelectedPlayer(e.target.value)} onClick={(e) => e.stopPropagation()}>
           <option value="">Select a player</option>
           {players.map(player => (

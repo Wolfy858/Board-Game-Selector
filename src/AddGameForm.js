@@ -6,11 +6,11 @@ import './styles/AddGameForm.css';
 
 const AddGameForm = ({ onAddGame }) => {
   const [game, setGame] = useState({
-    // title: '',
-    // description: '',
-    // players: '',
-    // playTime: '',
-    // thumbnail: ''
+    title: '',
+    description: '',
+    playerCount: '',
+    playTime: '',
+    thumbnail: ''
   });
   const [searchResults, setSearchResults] = useState([]);
 
@@ -26,7 +26,7 @@ const AddGameForm = ({ onAddGame }) => {
     const gameData = {
       title: gameXmlDoc.getElementsByTagName("name")[0].getAttribute("value"),
       description: gameXmlDoc.getElementsByTagName("description")[0].textContent,
-      players: gameXmlDoc.getElementsByTagName("minplayers")[0].getAttribute("value"),
+      playerCount: gameXmlDoc.getElementsByTagName("minplayers")[0].getAttribute("value"),
       playTime: gameXmlDoc.getElementsByTagName("playingtime")[0].getAttribute("value"),
       thumbnail: gameXmlDoc.getElementsByTagName("image")[0].textContent
     };
@@ -44,7 +44,7 @@ const AddGameForm = ({ onAddGame }) => {
     setGame({
       title: '',
       description: '',
-      players: '',
+      playerCount: '',
       playTime: '',
       thumbnail: ''
     });
@@ -72,12 +72,12 @@ const AddGameForm = ({ onAddGame }) => {
           />
         </div>
         <div className="form-field">
-          <label htmlFor="players">Number of players</label>
+          <label htmlFor="playerCount">Number of players</label>
           <input
             type="text"
-            name="players"
-            id="players"
-            value={game.players}
+            name="playerCount"
+            id="playerCount"
+            value={game.playerCount}
             onChange={handleChange}
           />
         </div>
