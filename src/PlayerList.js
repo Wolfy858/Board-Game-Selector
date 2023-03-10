@@ -25,9 +25,9 @@ function PlayersList() {
           player.preferences = preferences;
           player.id = playerSnapshot.key
           playerList.push(player);
-          setPlayers(playerList);
         });
       });
+      setPlayers(playerList);
     });
   }, []);
 
