@@ -8,6 +8,8 @@ import NavHeader from './NavHeader';
 import PlayersPage from './PlayersPage';
 import Play from './Play';
 
+import './styles/App.css'
+
 function App() {
   const [games, setGames] = useState([]);
   const gamesRef = ref(database, '/games');

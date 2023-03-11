@@ -1,0 +1,18 @@
+body {
+  background: linear-gradient(to bottom, #ce69e4, #51136c);
+  color: #333; /* dark gray text */
+  min-height: 100vh;
+}
+
+h2 {
+  color: white
+}
+
+label {
+  color: white
+}
+
+/* make all links a brighter color */
+a {
+  color: #8c1aff; /* bright purple */
+}

@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { ref, push } from 'firebase/database';
 import database from './Firebase';
 
+import './styles/AddPlayerForm.css'
+
 function AddPlayerForm() {
   const [name, setName] = useState('');
 

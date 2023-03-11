@@ -52,7 +52,7 @@ const AddGameForm = ({ onAddGame }) => {
   return (
     <div>
       <GameSearchForm onSearch={handleSearch} searchResults={searchResults} setSearchResults={setSearchResults} />
-      <form onSubmit={handleSubmit} className="add-game-form">
+      <form onSubmit={handleSubmit} className="add-game-form" >
         <div className="form-field">
           <label htmlFor="title">Title</label>
           <input
