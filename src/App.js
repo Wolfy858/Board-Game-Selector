@@ -6,6 +6,7 @@ import AddGameForm from './AddGameForm';
 import GameGrid from './GameGrid';
 import NavHeader from './NavHeader';
 import PlayersPage from './PlayersPage';
+import Play from './Play';
 
 function App() {
   const [games, setGames] = useState([]);
@@ -35,6 +36,7 @@ function App() {
         <Route exact path="/" element={<GameGrid games={games} />} />
         <Route path="/add-game" element={<AddGameForm onAddGame={addGame} />} />
         <Route path="/players" element={<PlayersPage />} />
+        <Route path="/play" element={<Play />} />
       </Routes>
     </div>
   );

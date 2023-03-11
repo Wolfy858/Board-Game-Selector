@@ -1,0 +1,36 @@
+.play {
+  text-align: center;
+}
+
+.play-button {
+  display: block;
+  margin: 0 auto;
+  background-color: #4CAF50;
+  color: white;
+  font-size: 2em;
+  padding: 1em;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.selected-game {
+  text-align: center;
+  margin-top: 3em;
+}
+
+.selected-game img {
+  width: 80%;
+  max-width: 600px;
+  margin-bottom: 1em;
+}
+
+.selected-game h2 {
+  font-size: 2em;
+  margin-bottom: 0.5em;
+}
+
+.selected-game h3 {
+  font-size: 1.5em;
+  margin-top: 0;
+}
