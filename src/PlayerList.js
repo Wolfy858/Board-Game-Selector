@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { ref, onValue, remove, update } from 'firebase/database';
+import { ref, onValue, remove, update, get } from 'firebase/database';
 import database from './Firebase';
 
 import './styles/PlayerList.css'
@@ -9,30 +9,34 @@ function PlayersList() {
 
   useEffect(() => {
     const playersRef = ref(database, '/players');
-    onValue(playersRef, (playerSnapshot) => {
+    onValue(playersRef, async (playerSnapshot) => {
       const playerList = [];
       playerSnapshot.forEach((playerSnapshot) => {
         const player = playerSnapshot.val();
-        const preferences = [];
-        const gamesRef = ref(database, '/games');
-        onValue(gamesRef, (gamesSnapshot) => {
-          gamesSnapshot.forEach((gameSnapshot) => {
-            const game = gameSnapshot.val();
-            if (game.enjoyers && Object.values(game.enjoyers).includes(playerSnapshot.key)) {
-              preferences.push(game.title);
+        player.preferences = [];
+        player.id = playerSnapshot.key
+        playerList.push(player);
+      });
+
+      const gamesRef = ref(database, '/games');
+      const gamesSnapshot = await get(gamesRef);
+      gamesSnapshot.forEach((gameSnapshot) => {
+        const game = gameSnapshot.val();
+        if (game.enjoyers) {
+          Object.entries(game.enjoyers).forEach(([enjoyerId, enjoyerIdVal]) => {
+            const player = playerList.find((p) => p.id === enjoyerIdVal);
+            if (player) {
+              player.preferences.push(game.title);
             }
           });
-          player.preferences = preferences;
-          player.id = playerSnapshot.key
-          playerList.push(player);
-        });
+        }
       });
+
       setPlayers(playerList);
     });
   }, []);
 
   const handleDelete = (player) => {
-    console.log(player.id)
     const playerRef = ref(database, `/players/${player.id}`);
     remove(playerRef);
 
@@ -72,5 +76,6 @@ function PlayersList() {
     </div>
   );
 }
+
 
 export default PlayersList;
