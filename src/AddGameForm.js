@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import GameSearchForm from './GameSearchForm'
 import database  from './Firebase';
+import condenseDescription from './OpenAI';
 
 import './styles/AddGameForm.css';
 
@@ -23,9 +24,13 @@ const AddGameForm = ({ onAddGame }) => {
     const gameResponse = await fetch(`https://boardgamegeek.com/xmlapi2/thing?id=${firstResultId}&type=boardgame&stats=1`);
     const gameXmlData = await gameResponse.text();
     const gameXmlDoc = parser.parseFromString(gameXmlData,"text/xml");
+
+    const condensedDescription = await condenseDescription(gameXmlDoc.getElementsByTagName("description")[0].textContent)
+    //const condensedDescription = gameXmlDoc.getElementsByTagName("description")[0].textContent
+
     const gameData = {
       title: gameXmlDoc.getElementsByTagName("name")[0].getAttribute("value"),
-      description: gameXmlDoc.getElementsByTagName("description")[0].textContent,
+      description: condensedDescription,
       playerCount: gameXmlDoc.getElementsByTagName("minplayers")[0].getAttribute("value"),
       playTime: gameXmlDoc.getElementsByTagName("playingtime")[0].getAttribute("value"),
       thumbnail: gameXmlDoc.getElementsByTagName("image")[0].textContent
