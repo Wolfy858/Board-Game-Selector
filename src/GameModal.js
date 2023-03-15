@@ -24,7 +24,7 @@ function GameModal({ game, onClose }) {
 
   const handleDeleteGame = () => {
     const gameRef = ref(database, `/games/${game.id}`);
-    remove(gameRef);
+    update(gameRef, { deleted: true });
 
     const playersRef = ref(database, '/players')
     onValue(playersRef, (playersSnapshot) => {

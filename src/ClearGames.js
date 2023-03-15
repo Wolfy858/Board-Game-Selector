@@ -1,5 +1,5 @@
 import React from "react"
-import { ref, remove } from 'firebase/database';
+import { ref, update, onValue, remove } from 'firebase/database';
 import database from './Firebase';
 
 import './styles/ClearGames.css'
@@ -9,7 +9,21 @@ const ClearGames = () => {
     const confirmDelete = window.confirm("Are you sure you want to delete all games? This action cannot be undone.");
     if (confirmDelete) {
       const gamesRef = ref(database, '/games');
-      remove(gamesRef);
+      onValue(gamesRef, (snapshot) => {
+        const gamesData = snapshot.val();
+        Object.entries(gamesData || {}).forEach(([key, value]) => {
+          const gameRef = ref(database, `/games/${key}`);
+          update(gameRef, { deleted: true });
+        });
+      });
+
+      const playersRef = ref(database, '/players');
+      onValue(playersRef, (playersSnapshot) => {
+        playersSnapshot.forEach((playerSnapshot) => {
+          const playerRef = ref(database, `/players/${playerSnapshot.key}/preferences`);
+          remove(playerRef);
+        });
+      });
     }
   }
 
