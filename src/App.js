@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import database from './Firebase';
-import { ref, set, onValue, push } from 'firebase/database'
+import { ref, set, onValue, push, query, orderByChild, equalTo } from 'firebase/database'
 import AddGameForm from './AddGameForm';
 import GameGrid from './GameGrid';
 import NavHeader from './NavHeader';
@@ -15,9 +15,9 @@ function App() {
   const gamesRef = ref(database, '/games');
 
   useEffect(() => {
-    onValue(gamesRef, (snapshot) => {
+    const queryRef = query(gamesRef, orderByChild("deleted"), equalTo(false));
+    onValue(queryRef, (snapshot) => {
       const gamesData = snapshot.val();
-
       const gamesArray = Object.entries(gamesData || {}).map(([key, value]) => ({
         id: key,
         ...value
@@ -28,7 +28,8 @@ function App() {
 
   const addGame = game => {
     const newGameRef = push(gamesRef);
-    set(newGameRef, game);
+    const nonDeletedGame = { ...game, deleted: false }
+    set(newGameRef, nonDeletedGame);
   }
 
   return (

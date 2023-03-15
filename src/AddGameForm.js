@@ -25,8 +25,8 @@ const AddGameForm = ({ onAddGame }) => {
     const gameXmlData = await gameResponse.text();
     const gameXmlDoc = parser.parseFromString(gameXmlData,"text/xml");
 
-    const condensedDescription = await condenseDescription(gameXmlDoc.getElementsByTagName("description")[0].textContent)
-    //const condensedDescription = gameXmlDoc.getElementsByTagName("description")[0].textContent
+    //const condensedDescription = await condenseDescription(gameXmlDoc.getElementsByTagName("description")[0].textContent) // With GPT
+    const condensedDescription = gameXmlDoc.getElementsByTagName("description")[0].textContent  // Without GPT
 
     const gameData = {
       title: gameXmlDoc.getElementsByTagName("name")[0].getAttribute("value"),
