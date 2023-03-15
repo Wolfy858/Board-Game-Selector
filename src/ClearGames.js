@@ -13,7 +13,10 @@ const ClearGames = () => {
         const gamesData = snapshot.val();
         Object.entries(gamesData || {}).forEach(([key, value]) => {
           const gameRef = ref(database, `/games/${key}`);
-          update(gameRef, { deleted: true });
+          update(gameRef, { 
+            deleted: true,
+            enjoyers: null
+          });
         });
       });
 

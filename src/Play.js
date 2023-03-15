@@ -14,7 +14,7 @@ function Play() {
     onValue(gamesRef, snapshot => {
       const gamesData = snapshot.val();
       const gamesArray = gamesData ? Object.entries(gamesData).map(([key, value]) => ({ id: key, ...value })) : [];
-      const enjoyableGamesArray = gamesArray.filter(game => game.enjoyers && Object.keys(game.enjoyers).length > 0);
+      const enjoyableGamesArray = gamesArray.filter(game => game.enjoyers && Object.keys(game.enjoyers).length > 0 && !game.deleted);
       setEnjoyableGames(enjoyableGamesArray);
     });
   }, []);
