@@ -4,6 +4,7 @@ import database from './Firebase';
 import DeleteGameButton from './DeleteGameButton';
 
 import './styles/GameModal.css';
+import { addPreference } from './utils/addPreference';
 
 function GameModal({ game, onClose }) {
   const [selectedPlayer, setSelectedPlayer] = useState('');
@@ -25,15 +26,8 @@ function GameModal({ game, onClose }) {
 
   const handleAddPreference = () => {
     if (selectedPlayer) {
-      const gameRef = ref(database, `/games/${game.id}`);
-      const gameEnjoyersRef = child(gameRef, 'enjoyers');
-      const newEnjoyerRef = push(gameEnjoyersRef, selectedPlayer);
-
-      const playerRef = ref(database, `/players/${selectedPlayer}`)
-      const playerPreferencesRef = child(playerRef, 'preferences');
-      push(playerPreferencesRef, game.id)
-
-      setSelectedPlayer(newEnjoyerRef.key);
+      const selectedPlayerId = addPreference(selectedPlayer, game)
+      setSelectedPlayer(selectedPlayerId);
       onClose();
     }
   };
