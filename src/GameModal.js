@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ref, onValue, child, push, update } from 'firebase/database';
+import { ref, onValue } from 'firebase/database';
 import database from './Firebase';
 import DeleteGameButton from './DeleteGameButton';
 
@@ -26,9 +26,7 @@ function GameModal({ game, onClose }) {
 
   const handleAddPreference = () => {
     if (selectedPlayer) {
-      const selectedPlayerId = addPreference(selectedPlayer, game)
-      setSelectedPlayer(selectedPlayerId);
-      onClose();
+      addPreference(selectedPlayer, game)
     }
   };
 
