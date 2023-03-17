@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import GameSearchForm from './GameSearchForm'
 import database  from './Firebase';
+import { ref, query, orderByChild, equalTo } from 'firebase/database'
 import condenseDescription from './OpenAI';
 
 import './styles/AddGameForm.css';
@@ -14,46 +15,37 @@ const AddGameForm = ({ onAddGame }) => {
     thumbnail: ''
   });
   const [searchResults, setSearchResults] = useState([]);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleSearch = async (query) => {
-    const response = await fetch(`https://www.boardgamegeek.com/xmlapi2/search?query=${query}&exact=1`);
-    const xmlData = await response.text();
-    const parser = new DOMParser();
-    const xmlDoc = parser.parseFromString(xmlData,"text/xml");
-    const firstResultId = xmlDoc.getElementsByTagName("item")[0].getAttribute("id");
-    const gameResponse = await fetch(`https://boardgamegeek.com/xmlapi2/thing?id=${firstResultId}&type=boardgame&stats=1`);
-    const gameXmlData = await gameResponse.text();
-    const gameXmlDoc = parser.parseFromString(gameXmlData,"text/xml");
-
-    //const condensedDescription = await condenseDescription(gameXmlDoc.getElementsByTagName("description")[0].textContent) // With GPT
-    const condensedDescription = gameXmlDoc.getElementsByTagName("description")[0].textContent  // Without GPT
-
-    const gameData = {
-      title: gameXmlDoc.getElementsByTagName("name")[0].getAttribute("value"),
-      description: condensedDescription,
-      playerCount: gameXmlDoc.getElementsByTagName("minplayers")[0].getAttribute("value"),
-      playTime: gameXmlDoc.getElementsByTagName("playingtime")[0].getAttribute("value"),
-      thumbnail: gameXmlDoc.getElementsByTagName("image")[0].textContent
-    };
-    setGame(gameData);
-    setSearchResults([]);
+    // ...
   };
 
   const handleChange = (e) => {
     setGame({ ...game, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = event => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    onAddGame(game); // update local state
-    setGame({
-      title: '',
-      description: '',
-      playerCount: '',
-      playTime: '',
-      thumbnail: ''
-    });
+    const gameRef = ref(database, '/games');
+    const gameQuery = query(gameRef, orderByChild('title'), equalTo(game.title));
+    const gameSnapshot = await gameQuery.once('value');
+
+    if (gameSnapshot.exists()) {
+      setErrorMessage(`Game with title "${game.title}" already exists.`);
+    } else {
+      onAddGame(game);
+      setGame({
+        title: '',
+        description: '',
+        playerCount: '',
+        playTime: '',
+        thumbnail: ''
+      });
+      setErrorMessage('');
+    }
   };
+
   return (
     <div>
       <GameSearchForm onSearch={handleSearch} searchResults={searchResults} setSearchResults={setSearchResults} />
@@ -96,6 +88,7 @@ const AddGameForm = ({ onAddGame }) => {
             onChange={handleChange}
           />
         </div>
+        {errorMessage && <div className="error-message">{errorMessage}</div>}
         <button type="submit">Add game</button>
       </form>
     </div>
