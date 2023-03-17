@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 
+import './styles/GameSearchForm.css'
+
 const GameSearchForm = ({ onSearch }) => {
   const [query, setQuery] = useState("");
 
@@ -14,7 +16,7 @@ const GameSearchForm = ({ onSearch }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className={'game-search-form'}>
       <input
         type="text"
         placeholder="Search for a game..."

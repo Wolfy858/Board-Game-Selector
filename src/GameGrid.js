@@ -21,7 +21,7 @@ function GameGrid({ games }) {
         {games.map(game => (
           <div
             key={game.id}
-            className="game-thumbnail"
+            className={`game-thumbnail ${game.thumbnail ? null : 'no-image'}`}
             style={{ backgroundImage: `url("${game.thumbnail}")` }}
             onClick={() => handleSelectGame(game)}
           >

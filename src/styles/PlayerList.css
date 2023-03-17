@@ -36,10 +36,10 @@ ul {
   cursor: pointer;
   font-size: 16px;
   position: absolute;
-  right: -10px;
-  top: -10px;
-  width: 25px;
-  height: 25px;
+  right: 2px;
+  top: -8px;
+  width: 30px;
+  height: 30px;
 }
 
 .player-name {

@@ -19,6 +19,11 @@
   background-size: cover;
 }
 
+.game-thumbnail.no-image {
+  background-color: grey;
+}
+
+
 .game-thumbnail p {
   margin-top: 10px;
   text-align: center;

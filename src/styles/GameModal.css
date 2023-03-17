@@ -42,6 +42,7 @@
 }
 
 .preference.active {
-  background-color: aqua;
+  background-color: #e0245e;
+  border-color: #e0245e;
   color: white;
 }
