@@ -7,9 +7,7 @@ import PreferenceBubble from './PreferenceBubble';
 import './styles/GameModal.css';
 
 function GameModal({ game, onClose }) {
-  const [selectedPlayer, setSelectedPlayer] = useState('');
   const [players, setPlayers] = useState([]);
-  const [preferences, setPreferences] = useState([]);
 
   const playersRef = ref(database, '/players');
 
