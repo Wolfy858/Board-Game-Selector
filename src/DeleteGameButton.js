@@ -10,7 +10,7 @@ function DeleteGameButton({ game, onClose }) {
   };
 
   return (
-    <button className="delete-game-button" onClick={handleDeleteGame}>
+    <button className="button delete-game-button" onClick={handleDeleteGame}>
       Delete Game
     </button>
   );

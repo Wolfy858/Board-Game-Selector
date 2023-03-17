@@ -46,3 +46,7 @@
   border-color: #e0245e;
   color: white;
 }
+
+.buttons-container {
+  display: flex;
+}

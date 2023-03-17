@@ -1,7 +1,5 @@
-/* .delete-game-button {
-  background-color: #cd0000;
+.button {
   border: none;
-  color: #fff;
   cursor: pointer;
   font-size: 16px;
   margin-right: 10px;
@@ -10,9 +8,4 @@
   text-decoration: none;
   text-transform: uppercase;
   border-radius: 15px;
-} */
-
-.delete-game-button {
-  color: #fff;
-  background-color: #cd0000
 }
