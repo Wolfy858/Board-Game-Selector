@@ -7,6 +7,7 @@ import './styles/GameSearchForm.css'
 const GameSearchForm = ({ onSearch }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [message, setMessage] = useState('');
+  const [messageType, setMessageType] = useState('');
 
   const handleSearch = async (event) => {
     event.preventDefault();
@@ -20,11 +21,14 @@ const GameSearchForm = ({ onSearch }) => {
         const gameId = Object.keys(gameRecord)[0]
         set(ref(database, 'games/' + gameId), { ...game, deleted: false });
         setMessage('Game added.');
+        setMessageType('success');
         setTimeout(() => {
           setMessage('');
+          setMessageType('');
         }, 3000);
       } else {
         setMessage('Game already exists.');
+        setMessageType('error');
       }
     } else {
       onSearch(searchQuery);
@@ -44,7 +48,11 @@ const GameSearchForm = ({ onSearch }) => {
         onChange={handleInputChange}
       />
       <button type="submit">Search</button>
-      {message && <div className="message">{message}</div>}
+      {message && (
+        <div className={`message ${messageType}`}>
+          {message}
+        </div>
+      )}
     </form>
   );
 };
