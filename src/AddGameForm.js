@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import GameSearchForm from './GameSearchForm'
 import database  from './Firebase';
-import { ref, query, orderByChild, equalTo } from 'firebase/database'
+import { ref, query, orderByChild, equalTo, get } from 'firebase/database'
 import condenseDescription from './OpenAI';
 
 import './styles/AddGameForm.css';
@@ -29,7 +29,7 @@ const AddGameForm = ({ onAddGame }) => {
     event.preventDefault();
     const gameRef = ref(database, '/games');
     const gameQuery = query(gameRef, orderByChild('title'), equalTo(game.title));
-    const gameSnapshot = await gameQuery.once('value');
+    const gameSnapshot = await get(gameQuery);
 
     if (gameSnapshot.exists()) {
       setErrorMessage(`Game with title "${game.title}" already exists.`);
