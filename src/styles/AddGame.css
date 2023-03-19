@@ -1,0 +1,32 @@
+.add-game-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f1f1f1;
+  height: 60px;
+  width: 100%;
+}
+
+.add-game-nav-link {
+  text-align: center;
+  text-decoration: none;
+  color: #5e5d5d;
+  font-size: 18px;
+  font-weight: 600;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-basis: 50%;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.add-game-nav-link:hover {
+  background-color: #88d863;
+  color: white
+}
+
+/* .add-game-nav-link.active {
+  background-color: #1890ff;
+  color: #fff;
+} */
