@@ -3,6 +3,8 @@ import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import database from './Firebase';
 import { ref, set, onValue, push, query, orderByChild, equalTo } from 'firebase/database'
 import AddGame from './AddGame';
+import GameSearchForm from './GameSearchForm';
+import AddGameForm from './AddGameForm';
 import GameGrid from './GameGrid';
 import NavHeader from './NavHeader';
 import PlayersPage from './PlayersPage';
@@ -33,15 +35,18 @@ function App() {
   }
 
   return (
-    <div>
-      <NavHeader />
-      <Routes>
-        <Route exact path="/" element={<GameGrid games={games} />} />
-        <Route path="/add-game" element={<AddGame onAddGame={addGame} />} />
-        <Route path="/players" element={<PlayersPage />} />
-        <Route path="/play" element={<Play />} />
-      </Routes>
-    </div>
+<div>
+  <NavHeader />
+  <Routes>
+    <Route path="/" element={<GameGrid games={games} />} />
+    <Route path="/add-game" element={<AddGame />} >
+      <Route path="search" element={<GameSearchForm onAddGame={addGame}/>} />
+      <Route path="custom" element={<AddGameForm onAddGame={addGame}/>} />
+    </Route>
+    <Route path="/players" element={<PlayersPage />} />
+    <Route path="/play" element={<Play />} />
+  </Routes>
+</div>
   );
 }
 

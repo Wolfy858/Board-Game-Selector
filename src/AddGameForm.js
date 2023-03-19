@@ -14,32 +14,7 @@ const AddGameForm = ({ onAddGame }) => {
     playTime: '',
     thumbnail: ''
   });
-  const [searchResults, setSearchResults] = useState([]);
   const [errorMessage, setErrorMessage] = useState('');
-
-  const handleSearch = async (query) => {
-    const response = await fetch(`https://www.boardgamegeek.com/xmlapi2/search?query=${query}&exact=1`);
-    const xmlData = await response.text();
-    const parser = new DOMParser();
-    const xmlDoc = parser.parseFromString(xmlData,"text/xml");
-    const firstResultId = xmlDoc.getElementsByTagName("item")[0].getAttribute("id");
-    const gameResponse = await fetch(`https://boardgamegeek.com/xmlapi2/thing?id=${firstResultId}&type=boardgame&stats=1`);
-    const gameXmlData = await gameResponse.text();
-    const gameXmlDoc = parser.parseFromString(gameXmlData,"text/xml");
-
-    //const condensedDescription = await condenseDescription(gameXmlDoc.getElementsByTagName("description")[0].textContent) // With GPT
-    const condensedDescription = gameXmlDoc.getElementsByTagName("description")[0].textContent  // Without GPT
-
-    const gameData = {
-      title: gameXmlDoc.getElementsByTagName("name")[0].getAttribute("value"),
-      description: condensedDescription,
-      playerCount: gameXmlDoc.getElementsByTagName("minplayers")[0].getAttribute("value"),
-      playTime: gameXmlDoc.getElementsByTagName("playingtime")[0].getAttribute("value"),
-      thumbnail: gameXmlDoc.getElementsByTagName("image")[0].textContent
-    };
-    onAddGame(gameData);
-    setSearchResults([]);
-  };
 
   const handleChange = (e) => {
     setGame({ ...game, [e.target.name]: e.target.value });
@@ -68,7 +43,7 @@ const AddGameForm = ({ onAddGame }) => {
 
   return (
     <div>
-      <GameSearchForm onSearch={handleSearch} searchResults={searchResults} setSearchResults={setSearchResults} />
+      {/* <GameSearchForm onSearch={handleSearch} searchResults={searchResults} setSearchResults={setSearchResults} /> */}
       <form onSubmit={handleSubmit} className="add-game-form" >
         <div className="form-field">
           <label htmlFor="title">Title</label>

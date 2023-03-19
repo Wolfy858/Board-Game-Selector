@@ -1,6 +1,4 @@
-import { Routes, Route, Link } from 'react-router-dom';
-import AddGameForm from './AddGameForm';
-import GameSearchForm from './GameSearchForm';
+import { Routes, Outlet, Link } from 'react-router-dom';
 
 function AddGame() {
   return (
@@ -9,17 +7,14 @@ function AddGame() {
       <nav>
         <ul>
           <li>
-            <Link to="/add">Add Game Form</Link>
+            <Link to="/add-game/search">Game Search Form</Link>
           </li>
           <li>
-            <Link to="/search">Game Search Form</Link>
+            <Link to="/add-game/custom">Add Game Form</Link>
           </li>
         </ul>
       </nav>
-      <Routes>
-        <Route path="/add" element={<AddGameForm />} />
-        <Route path="/search" element={<GameSearchForm />} />
-      </Routes>
+      <Outlet />
     </div>
   );
 }

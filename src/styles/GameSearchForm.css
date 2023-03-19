@@ -19,3 +19,8 @@
   background-color: #dc3545;
   color: #fff;
 }
+
+.add-game-button {
+  color: white;
+  background-color: green;
+}
