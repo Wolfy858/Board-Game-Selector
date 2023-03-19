@@ -40,20 +40,23 @@ const GameSearchForm = ({ onSearch }) => {
   };
 
   return (
-    <form onSubmit={handleSearch} className={'game-search-form'}>
-      <input
-        type="text"
-        placeholder="Search for a game..."
-        value={searchQuery}
-        onChange={handleInputChange}
-      />
-      <button type="submit">Search</button>
-      {message && (
-        <div className={`message ${messageType}`}>
-          {message}
-        </div>
-      )}
-    </form>
+    <div>
+      <h2>Add by search</h2>
+      <form onSubmit={handleSearch} className={'game-search-form'}>
+        <input
+          type="text"
+          placeholder="Search for a game..."
+          value={searchQuery}
+          onChange={handleInputChange}
+        />
+        <button type="submit">Search</button>
+        {message && (
+          <div className={`message ${messageType}`}>
+            {message}
+          </div>
+        )}
+      </form>
+    </div>
   );
 };
 

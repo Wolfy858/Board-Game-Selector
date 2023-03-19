@@ -37,7 +37,7 @@ const AddGameForm = ({ onAddGame }) => {
       playTime: gameXmlDoc.getElementsByTagName("playingtime")[0].getAttribute("value"),
       thumbnail: gameXmlDoc.getElementsByTagName("image")[0].textContent
     };
-    setGame(gameData);
+    onAddGame(gameData);
     setSearchResults([]);
   };
 
