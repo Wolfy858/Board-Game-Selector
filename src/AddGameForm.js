@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import GameSearchForm from './GameSearchForm'
 import database  from './Firebase';
-import { ref, query, orderByChild, equalTo, get } from 'firebase/database'
+import { ref, query, orderByChild, equalTo, get, set } from 'firebase/database'
 import condenseDescription from './OpenAI';
 
 import './styles/AddGameForm.css';
@@ -25,10 +25,32 @@ const AddGameForm = ({ onAddGame }) => {
     const gameRef = ref(database, '/games');
     const gameQuery = query(gameRef, orderByChild('title'), equalTo(game.title));
     const gameSnapshot = await get(gameQuery);
-
+  
     if (gameSnapshot.exists()) {
-      setErrorMessage(`Game with title "${game.title}" already exists.`);
+      const existingGameRecord = gameSnapshot.val();
+      const existingGame = Object.values(existingGameRecord)[0];
+      if (existingGame.deleted) {
+        // Game exists but was soft-deleted. Update and add it back to the database.
+        const gameUpdates = {
+          ...existingGame,
+          deleted: false
+        };
+        const existingGameId = Object.keys(existingGameRecord)[0]
+        await set(ref(database, `/games/${existingGameId}`), gameUpdates);
+        setGame({
+          title: '',
+          description: '',
+          playerCount: '',
+          playTime: '',
+          thumbnail: ''
+        });
+        setErrorMessage(`Game with title "${game.title}" has been added back to the collection. You can edit it there`);
+      } else {
+        // Game exists and is still in the database.
+        setErrorMessage(`Game with title "${game.title}" already exists.`);
+      }
     } else {
+      // Game is new to the database.
       onAddGame(game);
       setGame({
         title: '',
@@ -40,6 +62,7 @@ const AddGameForm = ({ onAddGame }) => {
       setErrorMessage('');
     }
   };
+  
 
   return (
     <div>
