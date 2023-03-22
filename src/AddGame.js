@@ -6,10 +6,10 @@ function AddGame() {
     <div>
       <div className="add-game-nav">
         <NavLink to="/add-game/search" className="add-game-nav-link" activeClassName="active">
-          Game Search Form
+          Game Search
         </NavLink>
         <NavLink to="/add-game/custom" className="add-game-nav-link" activeClassName="active">
-          Add Game Form
+          Add Custom Game
         </NavLink>
       </div>
       <Outlet />

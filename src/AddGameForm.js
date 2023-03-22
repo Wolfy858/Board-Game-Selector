@@ -22,6 +22,23 @@ const AddGameForm = ({ onAddGame }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    let errors = '';
+    if (!game.title.trim()) {
+      errors += 'Title cannot be blank.\n';
+    }
+    if (!game.description.trim()) {
+      errors += 'Description cannot be blank.\n';
+    }
+    if (!game.playerCount.trim() || isNaN(game.playerCount)) {
+      errors += 'Player count must be a number.\n';
+    }
+    if (!game.playTime.trim() || isNaN(game.playTime)) {
+      errors += 'Play time must be a number.\n';
+    }
+    if (errors) {
+      setErrorMessage(errors);
+      return;
+    }
     const gameRef = ref(database, '/games');
     const gameQuery = query(gameRef, orderByChild('title'), equalTo(game.title));
     const gameSnapshot = await get(gameQuery);
