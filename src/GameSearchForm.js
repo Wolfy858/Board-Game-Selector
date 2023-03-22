@@ -47,6 +47,12 @@ const GameSearchForm = ({ onAddGame }) => {
     const xmlData = await response.text();
     const parser = new DOMParser();
     const xmlDoc = parser.parseFromString(xmlData,"text/xml");
+
+    if (xmlDoc.getElementsByTagName("item").length === 0) {
+      flashMessage('Game not found.', 'error');
+      return;
+    }
+
     const firstResultId = xmlDoc.getElementsByTagName("item")[0].getAttribute("id");
     const gameResponse = await fetch(`https://boardgamegeek.com/xmlapi2/thing?id=${firstResultId}&type=boardgame&stats=1`);
     const gameXmlData = await gameResponse.text();
