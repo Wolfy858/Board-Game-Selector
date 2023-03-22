@@ -21,7 +21,7 @@
   transition: background-color 0.2s ease-in-out;
 }
 
-.add-game-nav-link:hover {
+.add-game-nav-link.active {
   background-color: #88d863;
-  color: white
+  color: white;
 }

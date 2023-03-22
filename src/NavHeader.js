@@ -11,7 +11,7 @@ const NavHeader = () => {
           <Link className="nav-button" to="/">Game Grid</Link>
         </li>
         <li>
-          <Link className="nav-button" to="/add-game">Add Game</Link>
+          <Link className="nav-button" to="/add-game/search">Add Game</Link>
         </li>
         <li>
           <Link className="nav-button" to="/players">Players</Link>

@@ -1,17 +1,16 @@
-import { Routes, Outlet, Link } from 'react-router-dom';
+import { Routes, Outlet, NavLink } from 'react-router-dom';
 import './styles/AddGame.css'
 
 function AddGame() {
   return (
     <div>
       <div className="add-game-nav">
-        <Link to="/add-game/search" className="add-game-nav-link">
+        <NavLink to="/add-game/search" className="add-game-nav-link" activeClassName="active">
           Game Search Form
-        </Link>
-        <Link to="/add-game/custom" className="add-game-nav-link">
+        </NavLink>
+        <NavLink to="/add-game/custom" className="add-game-nav-link" activeClassName="active">
           Add Game Form
-        </Link>
-        
+        </NavLink>
       </div>
       <Outlet />
     </div>
