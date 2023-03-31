@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
-import GameSearchForm from './GameSearchForm'
 import database  from './Firebase';
 import { ref, query, orderByChild, equalTo, get, set } from 'firebase/database'
-import condenseDescription from './OpenAI';
 
 import './styles/AddGameForm.css';
 

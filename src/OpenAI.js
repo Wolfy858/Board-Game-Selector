@@ -5,12 +5,6 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration);
 
 const condenseDescription = async (description) => {
-  // const response = await openai.createChatCompletion({
-  //   model: "gpt-3.5-turbo",
-  //   prompt: `The following is a description of a board game. Your task is to summarize the description in 300 characters or less. Description: ${description}`,
-  //   temperature: 0,
-  //   max_tokens: 300,
-  // });
   const response = await openai.createChatCompletion({
     "model": "gpt-3.5-turbo",
     "messages":[

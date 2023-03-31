@@ -1,4 +1,4 @@
-import { Routes, Outlet, NavLink } from 'react-router-dom';
+import { Outlet, NavLink } from 'react-router-dom';
 import './styles/AddGame.css'
 
 function AddGame() {

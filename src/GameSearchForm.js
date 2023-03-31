@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import database from './Firebase';
 import { ref, query, orderByChild, equalTo, get, set } from 'firebase/database';
+import condenseDescription from './OpenAI';
 
 import './styles/GameSearchForm.css'
 
 const GameSearchForm = ({ onAddGame }) => {
   const [searchQuery, setSearchQuery] = useState("");
-  const [searchResults, setSearchResults] = useState([]);
   const [message, setMessage] = useState('');
   const [messageType, setMessageType] = useState('');
 
@@ -58,8 +58,8 @@ const GameSearchForm = ({ onAddGame }) => {
     const gameXmlData = await gameResponse.text();
     const gameXmlDoc = parser.parseFromString(gameXmlData,"text/xml");
 
-    //const condensedDescription = await condenseDescription(gameXmlDoc.getElementsByTagName("description")[0].textContent) // With GPT
-    const condensedDescription = gameXmlDoc.getElementsByTagName("description")[0].textContent  // Without GPT
+    const condensedDescription = await condenseDescription(gameXmlDoc.getElementsByTagName("description")[0].textContent) // With GPT
+    //const condensedDescription = gameXmlDoc.getElementsByTagName("description")[0].textContent  // Without GPT
 
     const gameData = {
       title: gameXmlDoc.getElementsByTagName("name")[0].getAttribute("value"),
@@ -70,7 +70,6 @@ const GameSearchForm = ({ onAddGame }) => {
     };
     onAddGame(gameData);
     flashMessage('Game added.', 'success');
-    setSearchResults([]);
   };
 
   const handleInputChange = (e) => {
