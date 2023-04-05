@@ -9,6 +9,7 @@ const AddGameForm = ({ onAddGame }) => {
     title: '',
     description: '',
     minPlayerCount: '',
+    maxPlayerCount: '',
     playTime: '',
     thumbnail: ''
   });
@@ -28,6 +29,9 @@ const AddGameForm = ({ onAddGame }) => {
       errors += 'Description cannot be blank.\n';
     }
     if (!game.minPlayerCount.trim() || isNaN(game.minPlayerCount)) {
+      errors += 'Player count must be a number.\n';
+    }
+    if (!game.maxPlayerCount.trim() || isNaN(game.maxPlayerCount)) {
       errors += 'Player count must be a number.\n';
     }
     if (!game.playTime.trim() || isNaN(game.playTime)) {
@@ -56,6 +60,7 @@ const AddGameForm = ({ onAddGame }) => {
           title: '',
           description: '',
           minPlayerCount: '',
+          maxPlayerCount: '',
           playTime: '',
           thumbnail: ''
         });
@@ -71,6 +76,7 @@ const AddGameForm = ({ onAddGame }) => {
         title: '',
         description: '',
         minPlayerCount: '',
+        maxPlayerCount: '',
         playTime: '',
         thumbnail: ''
       });
@@ -102,12 +108,22 @@ const AddGameForm = ({ onAddGame }) => {
           />
         </div>
         <div className="form-field">
-          <label htmlFor="minPlayerCount">Number of players</label>
+          <label htmlFor="minPlayerCount">Minimum Number of players</label>
           <input
             type="text"
             name="minPlayerCount"
             id="minPlayerCount"
             value={game.minPlayerCount}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="form-field">
+          <label htmlFor="maxPlayerCount">Maximum Number of players</label>
+          <input
+            type="text"
+            name="maxPlayerCount"
+            id="maxPlayerCount"
+            value={game.maxPlayerCount}
             onChange={handleChange}
           />
         </div>
