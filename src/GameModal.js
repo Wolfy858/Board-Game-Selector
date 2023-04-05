@@ -11,7 +11,7 @@ function GameModal({ game, onClose }) {
   const [editMode, setEditMode] = useState(false);
   const [description, setDescription] = useState(game.description);
   const [playTime, setPlayTime] = useState(game.playTime);
-  const [playerCount, setPlayerCount] = useState(game.playerCount);
+  const [minPlayerCount, setMinPlayerCount] = useState(game.minPlayerCount);
 
   const playersRef = ref(database, '/players');
 
@@ -39,7 +39,7 @@ function GameModal({ game, onClose }) {
     update(ref(database, `/games/${game.id}`), {
       description,
       playTime,
-      playerCount
+      minPlayerCount
     }).then(() => {
       setEditMode(false);
     });
@@ -72,11 +72,11 @@ function GameModal({ game, onClose }) {
               />
             </p>
             <p>
-              Max number of players:{' '}
+              Miniumum number of players:{' '}
               <input
                 type="number"
-                value={playerCount}
-                onChange={e => setPlayerCount(parseInt(e.target.value))}
+                value={minPlayerCount}
+                onChange={e => setMinPlayerCount(parseInt(e.target.value))}
               />
             </p>
             <button onClick={handleSave}>Save</button>
@@ -86,7 +86,7 @@ function GameModal({ game, onClose }) {
             <p>Description: </p>
             <p>{description}</p>
             <p>Play time (minutes): {playTime}</p>
-            <p>Max number of players: {playerCount}</p>
+            <p>Minimum number of players: {minPlayerCount}</p>
             <div className="preferences-container">
               {players.map(player => (
                 <PreferenceBubble key={player.id} player={player} game={game} />

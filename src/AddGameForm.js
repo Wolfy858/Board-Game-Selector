@@ -8,7 +8,7 @@ const AddGameForm = ({ onAddGame }) => {
   const [game, setGame] = useState({
     title: '',
     description: '',
-    playerCount: '',
+    minPlayerCount: '',
     playTime: '',
     thumbnail: ''
   });
@@ -27,7 +27,7 @@ const AddGameForm = ({ onAddGame }) => {
     if (!game.description.trim()) {
       errors += 'Description cannot be blank.\n';
     }
-    if (!game.playerCount.trim() || isNaN(game.playerCount)) {
+    if (!game.minPlayerCount.trim() || isNaN(game.minPlayerCount)) {
       errors += 'Player count must be a number.\n';
     }
     if (!game.playTime.trim() || isNaN(game.playTime)) {
@@ -55,7 +55,7 @@ const AddGameForm = ({ onAddGame }) => {
         setGame({
           title: '',
           description: '',
-          playerCount: '',
+          minPlayerCount: '',
           playTime: '',
           thumbnail: ''
         });
@@ -70,7 +70,7 @@ const AddGameForm = ({ onAddGame }) => {
       setGame({
         title: '',
         description: '',
-        playerCount: '',
+        minPlayerCount: '',
         playTime: '',
         thumbnail: ''
       });
@@ -102,12 +102,12 @@ const AddGameForm = ({ onAddGame }) => {
           />
         </div>
         <div className="form-field">
-          <label htmlFor="playerCount">Number of players</label>
+          <label htmlFor="minPlayerCount">Number of players</label>
           <input
             type="text"
-            name="playerCount"
-            id="playerCount"
-            value={game.playerCount}
+            name="minPlayerCount"
+            id="minPlayerCount"
+            value={game.minPlayerCount}
             onChange={handleChange}
           />
         </div>

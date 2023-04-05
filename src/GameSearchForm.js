@@ -64,7 +64,7 @@ const GameSearchForm = ({ onAddGame }) => {
     const gameData = {
       title: gameXmlDoc.getElementsByTagName("name")[0].getAttribute("value"),
       description: condensedDescription,
-      playerCount: gameXmlDoc.getElementsByTagName("minplayers")[0].getAttribute("value"),
+      minPlayerCount: gameXmlDoc.getElementsByTagName("minplayers")[0].getAttribute("value"),
       playTime: gameXmlDoc.getElementsByTagName("playingtime")[0].getAttribute("value"),
       thumbnail: gameXmlDoc.getElementsByTagName("image")[0].textContent
     };
