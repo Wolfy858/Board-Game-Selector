@@ -23,8 +23,6 @@
   width: 80%;
   max-width: 600px;
   margin-bottom: 1em;
-  opacity: 0;
-  transition: opacity 0.5s ease-in-out;
 }
 
 .selected-game img.show {
