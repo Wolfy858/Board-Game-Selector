@@ -15,7 +15,6 @@ const condenseDescription = async (description) => {
     "temperature": 0,
     "max_tokens": 500
   })
-  debugger
   return response.data.choices[0].message.content
 }
 

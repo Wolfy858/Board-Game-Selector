@@ -93,7 +93,6 @@ function GameModal({ game, onClose }) {
           </>
         ) : (
           <>
-            <p>Description: </p>
             <p>{description}</p>
             <p>Play time (minutes): {playTime}</p>
             <p>Supports {minPlayerCount} - {maxPlayerCount} players</p>
